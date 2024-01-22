@@ -86,3 +86,19 @@ Now bind EKS to kubectl so whenever we use kubectl command it works with our EKS
 #aws eks update-kubeconfig --region us-west-2 --name three-tier-cluster
 #kubectl get pods
 
+Now we will deploy the application on Kubernetes cluster. We will create a namespace called as workshop.
+MongoDB Deployment
+Please change the name and password in k8s_manifests/mongodb/secrets.yaml This file consists of the ID and password of the MongoDB. The password is in encrypted format.
+#echo "password_123" | base64
+#<encrypted_password>
+#echo "<encrypted_password>" | base64 --decode
+#kubectl create namespace workshop
+#kubectl apply -f deploy.yaml
+#kubectl apply -f secrets.yaml
+#kubectl apply -f service.yaml
+#kubectl get deployment -n workshop
+#kubectl get pods -n workshop
+#kubectl get svc -n workshop
+If we don't define service type then it is called as headless service. It will take ClusterIP as the default service type.
+
+Now deploy backend using the image in ECR. Update the image name in 
