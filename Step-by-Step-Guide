@@ -159,3 +159,8 @@ path: /
 port: 3000
 name: frontend      --> frontend service name
 
+Hitting on http://app.three-tier-application.com will redirect you to LB
+
+#kubectl apply -f full_stack_lb.yaml
+#kubectll get ing -n workshop
+With the following command, we will get the address that we need to update in our URL website
