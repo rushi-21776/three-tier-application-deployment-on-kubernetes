@@ -144,3 +144,18 @@ This will create ALB in EKS cluster as we have defined namespace as kube-system.
 #kubectl get deployment -n kube-system aws-load-balancer-controller
 
 Now create Ingress for routing.
+Edit full_stack_lb.yaml as per your needs
+Name of ingress mainlb
+Ingress Class name is ALB (Application Load Balancer)
+Add your host URL (app.three-tier-application.com)
+
+The below given configuration will route the traffic to backend. (http://app.three-tier-application.com/api)
+path: /api    
+port: 8080
+name: api      --> backend service name
+
+The below given configuration will route the traffic to frontend. (http://app.three-tier-application.com/)
+path: /
+port: 3000
+name: frontend      --> frontend service name
+
