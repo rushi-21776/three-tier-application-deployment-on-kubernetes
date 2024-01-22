@@ -139,3 +139,8 @@ Deploying AWS Load Balancer Controller
 #helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=my-cluster --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller
 #kubectl get deployment -n kube-system aws-load-balancer-controller
 #kubectl apply -f full_stack_lb.yaml
+This will create ALB in EKS cluster as we have defined namespace as kube-system.
+
+#kubectl get deployment -n kube-system aws-load-balancer-controller
+
+Now create Ingress for routing.
