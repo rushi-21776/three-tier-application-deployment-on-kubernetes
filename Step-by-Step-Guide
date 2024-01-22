@@ -118,4 +118,7 @@ Now deploy frontend. Note:- We need to change the URL in frontend-deployment.yam
 #kubectl get pods -n workshop
 
 Now install AWS ALB(Application Load Balancer)
-
+#curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
+#aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json
+#eksctl utils associate-iam-oidc-provider --region=us-west-2 --cluster=three-tier-cluster --approve
+#eksctl create iamserviceaccount --cluster=three-tier-cluster --namespace=kube-system --name=aws-load-balancer-controller --role-name AmazonEKSLoadBalancerControllerRole --attach-policy-arn=arn:aws:iam::112233445566:policy/AWSLoadBalancerControllerIAMPolicy --approve --region=us-west-2
