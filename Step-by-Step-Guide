@@ -1,7 +1,16 @@
 We need a Workstation. In this case, we are using an EC2 Instance with Ubuntu installed in it.
 
-Make sure you have docker, git, minikube installed in it.
+Make sure you have docker, git, minikube, kubectl installed in it.
 Cloning the code. #git clone https://github.com/rushi-21776/three-tier-application-deployment-on-kubernetes.git
+#sudo apt-get update
+#sudo apt install docker.io
+#docker ps
+#sudo chown $USER /var/run/docker.sock
+
+#curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
+#chmod +x ./kubectl
+#sudo mv ./kubectl /usr/local/bin
+#kubectl version --short --client
 
 Now we will test the frontend by creating a Docker image ie. ReactJS
 #cd frontend/
@@ -61,4 +70,19 @@ Follow the push commands provided in AWS ECR
 #aws er-public get-login-password.........
 #docker tag <name>
 #docker push
+
+Now install eksctl on the machine. This helps us to control EKS on AWS.
+#curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
+#chmod +x ./kubectl
+#sudo mv ./kubectl /usr/local/bin
+#kubectl version --short --client
+
+Now setup EKS cluster using eksctl. In backend it is using AWS CloudFormation
+#eksctl create cluster --name three-tier-cluster --region us-west-2 --node-type t2.medium --nodes-min 2 --nodes-max 2
+#aws eks update-kubeconfig --region us-west-2 --name three-tier-cluster
+#kubectl get nodes
+
+Now bind EKS to kubectl so whenever we use kubectl command it works with our EKS cluster.
+#aws eks update-kubeconfig --region us-west-2 --name three-tier-cluster
+#kubectl get pods
 
