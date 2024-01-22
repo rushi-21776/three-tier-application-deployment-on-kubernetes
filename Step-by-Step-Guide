@@ -111,5 +111,11 @@ Follow the commands given in ECR.
 #kubectl logs <pod_name> -n workshop
 This will now show connect to DB which means it is working.
 
-Now deploy frontend
+Now deploy frontend. Note:- We need to change the URL in frontend-deployment.yaml Put your domain. The domain name should be registered. We are using "http://app.three-tier-application.com/" for example purpose.
+#kubectl apply -f frontend-deployment.yaml
+#kubectl apply -f frontend-service.yaml
+
+#kubectl get pods -n workshop
+
+Now install AWS ALB(Application Load Balancer)
 
