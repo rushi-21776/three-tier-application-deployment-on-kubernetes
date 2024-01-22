@@ -101,4 +101,15 @@ Please change the name and password in k8s_manifests/mongodb/secrets.yaml This f
 #kubectl get svc -n workshop
 If we don't define service type then it is called as headless service. It will take ClusterIP as the default service type.
 
-Now deploy backend using the image in ECR. Update the image name in 
+Now deploy backend using the image in ECR. Update the image name in backend-deployment.yaml 
+AWS ---> ECR ---> three-tier-backend ---> View Public Listing ---> URL of image
+Follow the commands given in ECR.
+
+#kubectl apply -f backend-deployment.yaml
+#kubectl apply -f backend-service.yaml
+#kubectl get pods -n workshop
+#kubectl logs <pod_name> -n workshop
+This will now show connect to DB which means it is working.
+
+Now deploy frontend
+
