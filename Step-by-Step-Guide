@@ -1,1 +1,64 @@
+We need a Workstation. In this case, we are using an EC2 Instance with Ubuntu installed in it.
+
+Make sure you have docker, git, minikube installed in it.
+Cloning the code. #git clone https://github.com/rushi-21776/three-tier-application-deployment-on-kubernetes.git
+
+Now we will test the frontend by creating a Docker image ie. ReactJS
+#cd frontend/
+#vi Dockerfile
+
+FROM node:14
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+CMD ["npm","start"]
+
+#docker build -t three-tier-frontend .
+#sudo chown $USER /var/run/docker.sock
+#docker images
+#docker run -d -p 3000:3000 three-tier-frontend:latest
+
+Add port 3000 in AWS machine Security Group
+Now we will push the image to AWS ECR(Elastic Container Registry). For this we need to install AWS CLIv2
+#curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+#sudo apt install unzip
+#unzip awscliv2.zip
+#sudo ./aws/install -i /usr/local/aws-cli -b /usr/local/bin --update
+#aws configure
+Add your Access Key and Secret Access Key.
+
+Now Create a Container Registry in ECR
+
+AWS ---> ECR ---> name(three-tier-frontend) ---> Create ---> View Push commands.
+Follow the push commands provided in AWS ECR
+#aws er-public get-login-password.........
+#docker tag <name>
+#docker push
+
+
+Now we will test the backend by creating a Docker image ie. NodeJS
+#cd backend
+#vi Dockerfile
+
+FROM node:14
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+CMD ["node","index.js"]
+
+#docker build -t three-tier-backend .
+#docker images
+#docker run -d -p 8080:8080 three-tier-backend:latest
+#docker logs <cintainer_id>
+It will show a log that says unable to connect to DB
+As of now, we have not created the DB. It means that the backend is working fine
+
+Now push the image to AWS ECR.
+AWS ---> ECR ---> name(three-tier-backend) ---> Create ---> View Push commands.
+Follow the push commands provided in AWS ECR
+#aws er-public get-login-password.........
+#docker tag <name>
+#docker push
 
