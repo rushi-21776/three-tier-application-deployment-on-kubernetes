@@ -77,7 +77,7 @@ Now install eksctl on the machine. This helps us to control EKS on AWS.
 #sudo mv ./kubectl /usr/local/bin
 #kubectl version --short --client
 
-Now setup EKS cluster using eksctl. In backend it is using AWS CloudFormation
+Now setup EKS cluster using eksctl. In backend it is using AWS CloudFormation. We are creating a cluster named three-tier-cluster in us-west-2 region with node-type t2.medium and maximum 2 nodes.
 #eksctl create cluster --name three-tier-cluster --region us-west-2 --node-type t2.medium --nodes-min 2 --nodes-max 2
 #aws eks update-kubeconfig --region us-west-2 --name three-tier-cluster
 #kubectl get nodes
